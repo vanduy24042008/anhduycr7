@@ -1,13 +1,13 @@
 body {
   font-family: Arial;
-  background-color: #ed8762;
+  background-color: #ffeaeb;
   margin: 20px;
 }
 
 nav a {
   margin-right: 15px;
   text-decoration: none;
-  color: darkblue;
+  color: #231f20;
   font-weight: bold;
 }
 
