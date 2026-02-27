@@ -2,26 +2,516 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Hoạt động</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoạt động lớp học</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    /* Thanh điều hướng */
+    nav {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1.5rem;
+      margin: 0 0.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav a:active {
+      transform: translateY(0);
+    }
+
+    hr {
+      display: none;
+    }
+
+    /* Container chính */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Tiêu đề trang */
+    .page-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .page-title h2 {
+      font-size: 2.5rem;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 1rem;
+    }
+
+    .page-title h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+
+    /* Grid hiển thị hoạt động */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    /* Card hoạt động */
+    .activity-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .activity-card:nth-child(1) { animation-delay: 0.2s; }
+    .activity-card:nth-child(2) { animation-delay: 0.4s; }
+    .activity-card:nth-child(3) { animation-delay: 0.6s; }
+    .activity-card:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .activity-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Header card với màu sắc khác nhau */
+    .card-header {
+      padding: 1.5rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255,255,255,0.1);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+    }
+
+    .activity-card:hover .card-header::before {
+      transform: rotate(45deg) translate(10%, 10%);
+    }
+
+    .card-header h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-date {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Màu sắc cho từng card */
+    .card-header.study { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .card-header.culture { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .card-header.sport { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .card-header.fun { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+    /* Nội dung card */
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-content p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .activity-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 2px solid #f0f0f0;
+    }
+
+    .participants {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .participants i {
+      font-size: 1.1rem;
+    }
+
+    .status {
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status.upcoming {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status.ongoing {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status.completed {
+      background: #cce5ff;
+      color: #004085;
+    }
+
+    /* Button xem thêm */
+    .btn-details {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .btn-details:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Timeline */
+    .timeline {
+      margin: 4rem 0;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .timeline h3 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .timeline-items {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .timeline-items::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      border-radius: 1.5px;
+    }
+
+    .timeline-item {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      border: 4px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.2);
+      box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .timeline-date {
+      font-weight: 600;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-activity {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem;
+      }
+      
+      nav a {
+        padding: 0.5rem 1rem;
+        margin: 0 0.2rem;
+        font-size: 0.9rem;
+      }
+      
+      .page-title h2 {
+        font-size: 2rem;
+      }
+      
+      .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .timeline-items {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .timeline-items::before {
+        display: none;
+      }
+      
+      .timeline-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-align: left;
+      }
+      
+      .timeline-dot {
+        margin: 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
+<!-- Thanh điều hướng -->
 <nav>
-  <a href="index.html">Trang chủ</a>
-  <a href="thanhvien.html">Thành viên</a>
-  <a href="hoatdong.html">Hoạt động</a>
-  <a href="thanhtich.html">Thành tích</a>
+  <a href="index.html">🏠 Trang chủ</a>
+  <a href="thanhvien.html">👥 Thành viên</a>
+  <a href="hoatdong.html" style="background: rgba(255,255,255,0.2);">📅 Hoạt động</a>
+  <a href="thanhtich.html">🏆 Thành tích</a>
 </nav>
-<hr>
-<h2>Các hoạt động của lớp</h2>
 
-<ul>
-  <li>Học nhóm ôn thi tốt nghiệp</li>
-  <li>Tham gia văn nghệ 20/11</li>
-  <li>Hoạt động ngoại khóa</li>
-    <li>Hjhj :3</li>
-</ul>
+<!-- Nội dung chính -->
+<div class="container">
+  <!-- Tiêu đề trang -->
+  <div class="page-title">
+    <h2>📅 Hoạt động lớp học</h2>
+  </div>
+
+  <!-- Grid hiển thị hoạt động -->
+  <div class="activities-grid">
+    <!-- Card 1: Học nhóm -->
+    <div class="activity-card">
+      <div class="card-header study">
+        <h3>📚 Học nhóm ôn thi</h3>
+        <span class="card-date">Tháng 5, 2024</span>
+      </div>
+      <div class="card-content">
+        <p>✏️ Ôn tập kiến thức tốt nghiệp cùng nhau<br>
+        ⏰ 19h-21h thứ 3-5 hàng tuần<br>
+        📍 Thư viện trường</p>
+        <div class="activity-stats">
+          <span class="participants">
+            <span>👥</span> 25 bạn tham gia
+          </span>
+          <span class="status ongoing">Đang diễn ra</span>
+        </div>
+        <button class="btn-details" onclick="alert('Chi tiết hoạt động học nhóm')">
+          Xem chi tiết →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 2: Văn nghệ 20/11 -->
+    <div class="activity-card">
+      <div class="card-header culture">
+        <h3>🎤 Văn nghệ 20/11</h3>
+        <span class="card-date">Tháng 11, 2024</span>
+      </div>
+      <div class="card-content">
+        <p>🎵 Tiết mục "Bụi phấn" - Hợp ca lớp<br>
+        💃 Múa phụ họa truyền thống<br>
+        🎭 Kịch ngắn về thầy cô</p>
+        <div class="activity-stats">
+          <span class="participants">
+            <span>👥</span> 15 bạn tham gia
+          </span>
+          <span class="status upcoming">Sắp diễn ra</span>
+        </div>
+        <button class="btn-details" onclick="alert('Chi tiết hoạt động văn nghệ')">
+          Xem chi tiết →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 3: Ngoại khóa -->
+    <div class="activity-card">
+      <div class="card-header sport">
+        <h3>⚽ Hoạt động ngoại khóa</h3>
+        <span class="card-date">Tháng 3, 2024</span>
+      </div>
+      <div class="card-content">
+        <p>🏃 Giải bóng đá nam nữ<br>
+        🏊 Hội thao dưới nước<br>
+        🧗‍♂️ Team building dã ngoại</p>
+        <div class="activity-stats">
+          <span class="participants">
+            <span>👥</span> 30 bạn tham gia
+          </span>
+          <span class="status completed">Đã kết thúc</span>
+        </div>
+        <button class="btn-details" onclick="alert('Chi tiết hoạt động ngoại khóa')">
+          Xem chi tiết →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 4: Sinh hoạt lớp -->
+    <div class="activity-card">
+      <div class="card-header fun">
+        <h3>😊 Hjhj :3</h3>
+        <span class="card-date">Hàng tuần</span>
+      </div>
+      <div class="card-content">
+        <p>🎮 Giao lưu, trò chuyện<br>
+        🎂 Sinh nhật tập thể<br>
+        💝 Chia sẻ niềm vui mỗi ngày</p>
+        <div class="activity-stats">
+          <span class="participants">
+            <span>👥</span> 40 bạn tham gia
+          </span>
+          <span class="status ongoing">Đang diễn ra</span>
+        </div>
+        <button class="btn-details" onclick="alert('Chi tiết hoạt động vui vẻ')">
+          Xem chi tiết →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline hoạt động -->
+  <div class="timeline">
+    <h3>⏰ Lịch trình sắp tới</h3>
+    <div class="timeline-items">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Tuần 1</div>
+        <div class="timeline-activity">Ôn tập Toán</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Tuần 2</div>
+        <div class="timeline-activity">Ôn tập Văn</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Tuần 3</div>
+        <div class="timeline-activity">Tập văn nghệ</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Tuần 4</div>
+        <div class="timeline-activity">Dã ngoại</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thống kê nhanh -->
+  <div style="display: flex; justify-content: space-around; margin-top: 3rem; padding: 2rem; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    <div style="text-align: center;">
+      <div style="font-size: 2.5rem; color: #667eea; font-weight: bold;">12+</div>
+      <div style="color: #666;">Hoạt động</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="font-size: 2.5rem; color: #764ba2; font-weight: bold;">100%</div>
+      <div style="color: #666;">Tham gia nhiệt tình</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="font-size: 2.5rem; color: #f093fb; font-weight: bold;">40</div>
+      <div style="color: #666;">Thành viên</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer đơn giản -->
+<div style="text-align: center; padding: 2rem; color: #666; margin-top: 2rem;">
+  <p>❤️ Lớp học thân yêu - Nơi gắn kết mọi người ❤️</p>
+</div>
 
 </body>
 </html>
