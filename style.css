@@ -1,480 +1,611 @@
-/* Reset và thiết lập cơ bản */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thành viên lớp 12C2</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Bổ sung CSS riêng cho trang thành viên */
+    .member-header {
+      text-align: center;
+      margin: 2rem 0;
+      animation: fadeInDown 0.8s ease;
+    }
 
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #ffeaeb;
-  color: #231f20;
-  margin: 0;
-  min-height: 100vh;
-  line-height: 1.6;
-}
+    .member-header h2 {
+      font-size: 2.5rem;
+      color: #231f20;
+      display: inline-block;
+      padding: 0 2rem 1rem;
+      border-bottom: 4px solid #231f20;
+    }
 
-/* Thanh điều hướng */
-nav {
-  background-color: #231f20;
-  padding: 1rem 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+    .class-info {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
 
-nav a {
-  color: #ffeaeb !important;
-  text-decoration: none;
-  padding: 0.5rem 1.5rem;
-  margin: 0 0.5rem;
-  border-radius: 25px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
+    .info-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
 
-nav a:hover {
-  background-color: #ffeaeb;
-  color: #231f20 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(255, 234, 235, 0.3);
-}
+    .info-card:nth-child(1) { animation-delay: 0.1s; }
+    .info-card:nth-child(2) { animation-delay: 0.2s; }
+    .info-card:nth-child(3) { animation-delay: 0.3s; }
+    .info-card:nth-child(4) { animation-delay: 0.4s; }
 
-nav a:active {
-  transform: translateY(0);
-}
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(35, 31, 32, 0.15);
+    }
 
-/* Container chính */
-.container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
+    .info-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
 
-/* Tiêu đề */
-h1, h2, h3 {
-  color: #231f20;
-  margin-bottom: 1rem;
-}
+    .info-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 0.5rem;
+    }
 
-h1 {
-  font-size: 2.5rem;
-  text-align: center;
-  position: relative;
-  padding-bottom: 1rem;
-}
+    .info-label {
+      color: #666;
+      font-weight: 600;
+    }
 
-h1:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background-color: #231f20;
-  border-radius: 2px;
-}
+    .search-section {
+      background: white;
+      border-radius: 50px;
+      padding: 0.5rem;
+      margin: 2rem 0;
+      display: flex;
+      box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
+    }
 
-h2 {
-  font-size: 2rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
+    .search-input {
+      flex: 1;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      background: transparent;
+    }
 
-h2:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background-color: #231f20;
-  border-radius: 2px;
-}
+    .search-input:focus {
+      outline: none;
+    }
 
-/* Bảng */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
-}
+    .search-btn {
+      background-color: #231f20;
+      color: #ffeaeb;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-th, td {
-  padding: 12px 15px;
-  text-align: left;
-}
+    .search-btn:hover {
+      background-color: #ffeaeb;
+      color: #231f20;
+      transform: scale(1.05);
+    }
 
-th {
-  background-color: #231f20;
-  color: #ffeaeb;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-}
+    /* Bảng danh sách lớp */
+    .class-table {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+      margin: 2rem 0;
+    }
 
-td {
-  border-bottom: 1px solid #ffeaeb;
-}
+    .table-header {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-tr:last-child td {
-  border-bottom: none;
-}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-tr:hover td {
-  background-color: #fff5f6;
-}
+    th {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
 
-/* Card */
-.card {
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #ffeaeb;
+    }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(35, 31, 32, 0.15);
-}
+    tr:last-child td {
+      border-bottom: none;
+    }
 
-/* Grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
+    tr:hover td {
+      background-color: #fff5f6;
+    }
 
-/* Form */
-form {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
-}
+    .student-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #ffeaeb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #231f20;
+      border: 2px solid #231f20;
+    }
 
-input, textarea, select {
-  width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0 1rem;
-  border: 2px solid #ffeaeb;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  font-family: inherit;
-}
+    .student-name {
+      font-weight: 600;
+    }
 
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #231f20;
-  box-shadow: 0 0 0 3px rgba(35, 31, 32, 0.1);
-}
+    .student-role {
+      background-color: #ffeaeb;
+      color: #231f20;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+    }
 
-button {
-  background-color: #231f20;
-  color: #ffeaeb;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    .student-status {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
 
-button:hover {
-  background-color: #ffeaeb;
-  color: #231f20;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.2);
-}
+    .status-active {
+      background-color: #4CAF50;
+    }
 
-/* Link */
-a {
-  color: #231f20;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
+    /* Phân trang */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+    }
 
-a:hover {
-  color: #333;
-  text-decoration: underline;
-}
+    .page-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: white;
+      color: #231f20;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(35, 31, 32, 0.1);
+    }
 
-/* List */
-ul, ol {
-  padding-left: 1.5rem;
-  margin: 1rem 0;
-}
+    .page-item:hover {
+      background-color: #231f20;
+      color: #ffeaeb;
+      transform: translateY(-2px);
+    }
 
-li {
-  margin: 0.5rem 0;
-}
+    .page-item.active {
+      background-color: #231f20;
+      color: #ffeaeb;
+    }
 
-/* Image */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.2);
-  transition: transform 0.3s ease;
-}
+    /* Bảng nhiệm vụ */
+    .duty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
 
-img:hover {
-  transform: scale(1.02);
-}
+    .duty-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
 
-/* Badge */
-.badge {
-  display: inline-block;
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background-color: #ffeaeb;
-  color: #231f20;
-  border: 2px solid #231f20;
-}
+    .duty-card:nth-child(1) { animation-delay: 0.2s; }
+    .duty-card:nth-child(2) { animation-delay: 0.4s; }
+    .duty-card:nth-child(3) { animation-delay: 0.6s; }
 
-/* Timeline */
-.timeline {
-  position: relative;
-  padding: 2rem 0;
-}
+    .duty-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(35, 31, 32, 0.2);
+    }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 20px;
-  height: 100%;
-  width: 3px;
-  background-color: #231f20;
-}
+    .duty-header {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
 
-.timeline-item {
-  position: relative;
-  padding-left: 50px;
-  margin-bottom: 2rem;
-}
+    .duty-list {
+      padding: 1.5rem;
+    }
 
-.timeline-dot {
-  position: absolute;
-  left: 10px;
-  width: 20px;
-  height: 20px;
-  background-color: #231f20;
-  border: 3px solid #ffeaeb;
-  border-radius: 50%;
-}
+    .duty-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed #ffeaeb;
+    }
 
-.timeline-content {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
-}
+    .duty-item:last-child {
+      border-bottom: none;
+    }
 
-/* Stats */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
+    .duty-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #ffeaeb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border: 2px solid #231f20;
+    }
 
-.stat-item {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
-}
+    .duty-info {
+      flex: 1;
+    }
 
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #231f20;
-  margin-bottom: 0.5rem;
-}
+    .duty-name {
+      font-weight: 600;
+      color: #231f20;
+    }
 
-.stat-label {
-  color: #666;
-  font-weight: 600;
-}
+    .duty-role {
+      font-size: 0.9rem;
+      color: #666;
+    }
 
-/* Footer */
-footer {
-  background-color: #231f20;
-  color: #ffeaeb;
-  text-align: center;
-  padding: 2rem;
-  margin-top: 3rem;
-}
+    @media (max-width: 768px) {
+      .class-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .search-section {
+        flex-direction: column;
+        border-radius: 20px;
+      }
+      
+      .search-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
 
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+<!-- Thanh điều hướng -->
+<nav>
+  <a href="index.html">🏠 Trang chủ</a>
+  <a href="thanhvien.html" style="background-color: #ffeaeb; color: #231f20;">👥 Thành viên</a>
+  <a href="hoatdong.html">📅 Hoạt động</a>
+  <a href="thanhtich.html">🏆 Thành tích</a>
+</nav>
 
-.fade-in {
-  animation: fadeIn 0.6s ease forwards;
-}
+<div class="container">
+  <!-- Header -->
+  <div class="member-header">
+    <h2>👥 Thành viên lớp 12C2</h2>
+    <p style="color: #666; margin-top: 1rem;">40 cá tính - Một tập thể đoàn kết</p>
+  </div>
 
-/* Responsive */
-@media (max-width: 768px) {
-  nav {
-    padding: 1rem;
-  }
-  
-  nav a {
-    padding: 0.5rem 1rem;
-    margin: 0 0.2rem;
-    font-size: 0.9rem;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
-  
-  .container {
-    padding: 0 1rem;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  
-  .timeline::before {
-    left: 15px;
-  }
-  
-  .timeline-item {
-    padding-left: 40px;
-  }
-  
-  .timeline-dot {
-    left: 5px;
-    width: 15px;
-    height: 15px;
-  }
-}
+  <!-- Thông tin lớp -->
+  <div class="class-info">
+    <div class="info-card">
+      <div class="info-icon">👨‍🎓</div>
+      <div class="info-number">22</div>
+      <div class="info-label">Nam</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">👩‍🎓</div>
+      <div class="info-number">18</div>
+      <div class="info-label">Nữ</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🏆</div>
+      <div class="info-number">15</div>
+      <div class="info-label">Học sinh giỏi</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">📚</div>
+      <div class="info-number">100%</div>
+      <div class="info-label">Đoàn viên</div>
+    </div>
+  </div>
 
-/* Class-specific styles */
-.hero-section {
-  background: white;
-  border-radius: 20px;
-  padding: 3rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
-}
+  <!-- Thanh tìm kiếm -->
+  <div class="search-section">
+    <input type="text" class="search-input" placeholder="🔍 Tìm kiếm thành viên...">
+    <button class="search-btn" onclick="alert('Chức năng tìm kiếm đang phát triển')">Tìm kiếm</button>
+  </div>
 
-.slogan {
-  font-size: 1.5rem;
-  color: #231f20;
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: #ffeaeb;
-  border-radius: 50px;
-  display: inline-block;
-}
+  <!-- Danh sách lớp chính -->
+  <div class="class-table">
+    <div class="table-header">
+      <span>📋</span> Danh sách lớp 12C2
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th></th>
+          <th>Họ và tên</th>
+          <th>Ngày sinh</th>
+          <th>Chức vụ</th>
+          <th>Tổ</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><div class="student-avatar">A</div></td>
+          <td class="student-name">Nguyễn Văn An</td>
+          <td>15/03/2006</td>
+          <td><span class="student-role">Lớp trưởng</span></td>
+          <td>1</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><div class="student-avatar">B</div></td>
+          <td class="student-name">Trần Thị Bích</td>
+          <td>22/07/2006</td>
+          <td><span class="student-role">Lớp phó học tập</span></td>
+          <td>2</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><div class="student-avatar">C</div></td>
+          <td class="student-name">Lê Văn Cường</td>
+          <td>10/11/2006</td>
+          <td><span class="student-role">Lớp phó lao động</span></td>
+          <td>3</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><div class="student-avatar">D</div></td>
+          <td class="student-name">Phạm Thị Dung</td>
+          <td>05/09/2006</td>
+          <td><span class="student-role">Bí thư</span></td>
+          <td>1</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><div class="student-avatar">E</div></td>
+          <td class="student-name">Hoàng Văn Em</td>
+          <td>18/12/2006</td>
+          <td><span class="student-role">Tổ trưởng tổ 1</span></td>
+          <td>1</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><div class="student-avatar">F</div></td>
+          <td class="student-name">Vũ Thị Phương</td>
+          <td>30/04/2006</td>
+          <td><span class="student-role">Tổ trưởng tổ 2</span></td>
+          <td>2</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><div class="student-avatar">G</div></td>
+          <td class="student-name">Đỗ Văn Giang</td>
+          <td>25/01/2006</td>
+          <td><span class="student-role">Tổ trưởng tổ 3</span></td>
+          <td>3</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><div class="student-avatar">H</div></td>
+          <td class="student-name">Ngô Thị Hồng</td>
+          <td>14/06/2006</td>
+          <td><span class="student-role">Tổ phó tổ 1</span></td>
+          <td>1</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><div class="student-avatar">I</div></td>
+          <td class="student-name">Dương Văn Inh</td>
+          <td>08/08/2006</td>
+          <td><span class="student-role">Thủ quỹ</span></td>
+          <td>2</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><div class="student-avatar">K</div></td>
+          <td class="student-name">Bùi Thị Kim</td>
+          <td>19/05/2006</td>
+          <td><span class="student-role">Thư ký</span></td>
+          <td>3</td>
+          <td><span class="student-status status-active"></span>Đang học</td>
+        </tr>
+        <!-- Có thể thêm tiếp các thành viên khác -->
+      </tbody>
+    </table>
+  </div>
 
-.team-info {
-  background-color: #231f20;
-  color: #ffeaeb;
-  padding: 0.5rem 2rem;
-  border-radius: 50px;
-  display: inline-block;
-  margin-top: 1rem;
-}
+  <!-- Phân trang -->
+  <div class="pagination">
+    <div class="page-item">←</div>
+    <div class="page-item active">1</div>
+    <div class="page-item">2</div>
+    <div class="page-item">3</div>
+    <div class="page-item">4</div>
+    <div class="page-item">→</div>
+  </div>
 
-/* Contact section */
-.contact-info {
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-}
+  <!-- Ban cán sự lớp -->
+  <div class="duty-grid">
+    <div class="duty-card">
+      <div class="duty-header">👑 Ban cán sự lớp</div>
+      <div class="duty-list">
+        <div class="duty-item">
+          <div class="duty-avatar">A</div>
+          <div class="duty-info">
+            <div class="duty-name">Nguyễn Văn An</div>
+            <div class="duty-role">Lớp trưởng</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">B</div>
+          <div class="duty-info">
+            <div class="duty-name">Trần Thị Bích</div>
+            <div class="duty-role">Lớp phó học tập</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">C</div>
+          <div class="duty-info">
+            <div class="duty-name">Lê Văn Cường</div>
+            <div class="duty-role">Lớp phó lao động</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #ffeaeb;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
+    <div class="duty-card">
+      <div class="duty-header">🌟 Ban chấp hành Đoàn</div>
+      <div class="duty-list">
+        <div class="duty-item">
+          <div class="duty-avatar">D</div>
+          <div class="duty-info">
+            <div class="duty-name">Phạm Thị Dung</div>
+            <div class="duty-role">Bí thư</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">E</div>
+          <div class="duty-info">
+            <div class="duty-name">Hoàng Văn Em</div>
+            <div class="duty-role">Phó bí thư</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">F</div>
+          <div class="duty-info">
+            <div class="duty-name">Vũ Thị Phương</div>
+            <div class="duty-role">Ủy viên</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-.contact-item:hover {
-  transform: translateX(10px);
-}
+    <div class="duty-card">
+      <div class="duty-header">📊 Tổ trưởng các tổ</div>
+      <div class="duty-list">
+        <div class="duty-item">
+          <div class="duty-avatar">E</div>
+          <div class="duty-info">
+            <div class="duty-name">Hoàng Văn Em</div>
+            <div class="duty-role">Tổ trưởng tổ 1</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">F</div>
+          <div class="duty-info">
+            <div class="duty-name">Vũ Thị Phương</div>
+            <div class="duty-role">Tổ trưởng tổ 2</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">G</div>
+          <div class="duty-info">
+            <div class="duty-name">Đỗ Văn Giang</div>
+            <div class="duty-role">Tổ trưởng tổ 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-.contact-icon {
-  font-size: 1.5rem;
-  min-width: 40px;
-  text-align: center;
-}
+  <!-- Thống kê theo tổ -->
+  <div class="grid">
+    <div class="card">
+      <h3>Tổ 1</h3>
+      <p>👥 14 thành viên (8 nam, 6 nữ)</p>
+      <p>🏆 5 học sinh giỏi</p>
+      <p>📍 Tổ trưởng: Hoàng Văn Em</p>
+    </div>
+    <div class="card">
+      <h3>Tổ 2</h3>
+      <p>👥 13 thành viên (7 nam, 6 nữ)</p>
+      <p>🏆 5 học sinh giỏi</p>
+      <p>📍 Tổ trưởng: Vũ Thị Phương</p>
+    </div>
+    <div class="card">
+      <h3>Tổ 3</h3>
+      <p>👥 13 thành viên (7 nam, 6 nữ)</p>
+      <p>🏆 5 học sinh giỏi</p>
+      <p>📍 Tổ trưởng: Đỗ Văn Giang</p>
+    </div>
+  </div>
 
-/* Button variants */
-.btn-outline {
-  background-color: transparent;
-  color: #231f20;
-  border: 2px solid #231f20;
-}
+  <!-- Nút thêm -->
+  <div style="text-align: center; margin: 2rem 0;">
+    <button onclick="alert('Chức năng đang phát triển')">
+      📥 Xuất danh sách lớp
+    </button>
+  </div>
+</div>
 
-.btn-outline:hover {
-  background-color: #231f20;
-  color: #ffeaeb;
-}
+<!-- Footer -->
+<footer>
+  <p>© 2024 - Lớp 12C2 THPT Nguyễn Du</p>
+  <p>👥 40 thành viên - 40 trái tim - Một ngôi nhà chung</p>
+</footer>
 
-.btn-small {
-  padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-}
-
-/* Alert */
-.alert {
-  padding: 1rem;
-  border-radius: 10px;
-  margin: 1rem 0;
-  background-color: #fff5f6;
-  border-left: 4px solid #231f20;
-  color: #231f20;
-}
-
-/* Divider */
-hr {
-  border: none;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #231f20, transparent);
-  margin: 2rem 0;
-}
+</body>
+</html>
