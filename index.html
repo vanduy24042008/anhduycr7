@@ -5,136 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lớp 12C2 - Trang chủ</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
-    <!-- Thanh điều hướng -->
     <nav class="navbar">
-  <div class="logo"><span>12C2</span></div>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Trang chủ</a></li>
-    <li><a href="thanhvien.html">Thành viên</a></li>
-    <li><a href="hoatdong.html">Hoạt động</a></li>
-    <li><a href="thanhtich.html">Thành tích</a></li>
-  </ul>
-</nav>
+      <div class="logo"><strong>12C2</strong></div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Trang chủ</a></li>
+        <li><a href="thanhvien.html">Thành viên</a></li>
+        <li><a href="hoatdong.html">Hoạt động</a></li>
+        <li><a href="thanhtich.html">Thành tích</a></li>
+      </ul>
+    </nav>
 
-    <!-- Nội dung chính -->
     <main class="main-content">
-      <!-- Header với thông tin lớp -->
-      <header class="class-header">
-        <div class="header-text">
-          <h1>Website Lớp 12C2</h1>
-          <div class="slogan-box">
-            <i class="fas fa-quote-left"></i>
-            <p class="slogan">Đoàn kết – Chăm chỉ – Vươn lên</p>
-            <i class="fas fa-quote-right"></i>
-          </div>
-          <p class="author"><i class="fas fa-pencil-alt"></i> Thực hiện: Team con chuột</p>
-        </div>
-        <div class="header-stats">
-          <div class="stat-item">
-            <i class="fas fa-user-graduate"></i>
-            <span class="stat-number">45</span>
-            <span class="stat-label">Thành viên</span>
-          </div>
-          <div class="stat-item">
-            <i class="fas fa-star"></i>
-            <span class="stat-number">12</span>
-            <span class="stat-label">Thành tích</span>
-          </div>
-          <div class="stat-item">
-            <i class="fas fa-calendar-check"></i>
-            <span class="stat-number">24</span>
-            <span class="stat-label">Hoạt động</span>
-          </div>
-        </div>
+      <header style="text-align: center;">
+        <h1>Chào mừng đến với Website Lớp 12C2</h1>
+        <p><i>"Đoàn kết – Chăm chỉ – Vươn lên"</i></p>
       </header>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="lop.jpg" alt="Ảnh lớp" style="max-width: 100%; border-radius: 15px; border: 3px solid rgba(255,255,255,0.2);">
+      </div>
 
-      <!-- Ảnh lớp -->
-      <section class="class-image-section">
-        <div class="image-wrapper">
-          <img src="lop.jpg" alt="Ảnh lớp 12C2" class="class-image">
-          <div class="image-overlay">
-            <span class="overlay-text">Kỷ niệm 12C2</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Giới thiệu ngắn -->
-      <section class="intro-section">
-        <h2><i class="fas fa-info-circle"></i> Về chúng tôi</h2>
-        <p>Lớp 12C2 là một tập thể đoàn kết, năng động và sáng tạo. Chúng tôi luôn nỗ lực trong học tập và nhiệt huyết trong các hoạt động phong trào.</p>
-      </section>
-
-      <!-- Liên hệ và Form góp ý -->
-      <section class="contact-section">
-        <h2><i class="fas fa-envelope"></i> Liên hệ với chúng tôi</h2>
-        
-        <div class="contact-grid">
-          <!-- Thông tin liên hệ -->
-          <div class="contact-info">
-            <div class="info-card">
-              <i class="fas fa-envelope-open-text"></i>
-              <h3>Email lớp</h3>
-              <p><a href="mailto:vanduy2804@gmail.com">vanduy2804@gmail.com</a></p>
-            </div>
-            
-            <div class="info-card">
-              <i class="fab fa-facebook"></i>
-              <h3>PAGE Trường</h3>
-              <p><a href="https://www.facebook.com/profile.php?id=61553086445266" target="_blank">THPT Nguyễn Du</a></p>
-            </div>
-
-            <div class="info-card">
-              <i class="fas fa-map-marker-alt"></i>
-              <h3>Địa chỉ</h3>
-              <p>Trường THPT Nguyễn Du</p>
-            </div>
-          </div>
-
-          <!-- Form góp ý -->
-          <div class="contact-form">
-            <h3><i class="fas fa-paper-plane"></i> Gửi góp ý cho lớp</h3>
-            <form>
-              <div class="form-group">
-                <label for="name">Họ tên:</label>
-                <input type="text" id="name" placeholder="Nhập họ tên của bạn">
-              </div>
-              
-              <div class="form-group">
-                <label for="message">Nội dung:</label>
-                <textarea id="message" rows="4" placeholder="Nhập nội dung góp ý..."></textarea>
-              </div>
-              
-              <button type="submit" class="submit-btn">
-                <i class="fas fa-paper-plane"></i> Gửi góp ý
-              </button>
-            </form>
-          </div>
-        </div>
+      <section>
+        <h2>Về chúng tôi</h2>
+        <p>Lớp 12C2 là một tập thể đoàn kết, năng động và sáng tạo tại trường THPT Nguyễn Du. Chúng tôi không chỉ nỗ lực trong học tập mà còn nhiệt huyết trong mọi phong trào của trường lớp.</p>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <p>&copy; 2024 Lớp 12C2 - THPT Nguyễn Du</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-tiktok"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
-    </footer>
+    <footer>© 2024 Thực hiện bởi Team con chuột</footer>
   </div>
 </body>
 </html>
-
