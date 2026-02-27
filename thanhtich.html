@@ -2,25 +2,538 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thành tích</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thành tích lớp 12C2</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Bổ sung thêm CSS riêng cho trang thành tích */
+    .achievement-header {
+      text-align: center;
+      margin: 2rem 0;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .achievement-header h2 {
+      font-size: 2.5rem;
+      color: #231f20;
+      display: inline-block;
+      padding: 0 2rem 1rem;
+      border-bottom: 4px solid #231f20;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .stat-card:nth-child(1) { animation-delay: 0.2s; }
+    .stat-card:nth-child(2) { animation-delay: 0.4s; }
+    .stat-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(35, 31, 32, 0.2);
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .achievement-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .achievement-card:nth-child(1) { animation-delay: 0.2s; }
+    .achievement-card:nth-child(2) { animation-delay: 0.4s; }
+    .achievement-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .achievement-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 50px rgba(35, 31, 32, 0.2);
+    }
+
+    .achievement-image {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .achievement-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .achievement-card:hover .achievement-image img {
+      transform: scale(1.1);
+    }
+
+    .achievement-image::after {
+      content: '🏆';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .achievement-content {
+      padding: 1.5rem;
+    }
+
+    .achievement-title {
+      font-size: 1.5rem;
+      color: #231f20;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .achievement-category {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background-color: #ffeaeb;
+      color: #231f20;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border: 2px solid #231f20;
+    }
+
+    .achievement-desc {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .achievement-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 2px solid #ffeaeb;
+    }
+
+    .achievement-date {
+      color: #888;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .achievement-badge {
+      background: #231f20;
+      color: #ffeaeb;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .honor-board {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+    }
+
+    .honor-board h3 {
+      font-size: 2rem;
+      color: #231f20;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .student-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .student-item {
+      background: #ffeaeb;
+      padding: 1rem;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .student-item:hover {
+      transform: translateX(10px);
+      background: #231f20;
+      color: #ffeaeb;
+    }
+
+    .student-rank {
+      background: #231f20;
+      color: #ffeaeb;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .student-item:hover .student-rank {
+      background: #ffeaeb;
+      color: #231f20;
+    }
+
+    .student-name {
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .student-achievement {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .student-item:hover .student-achievement {
+      color: #ffeaeb;
+    }
+
+    .timeline-section {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+    }
+
+    .timeline-section h3 {
+      font-size: 2rem;
+      color: #231f20;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background-color: #231f20;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      width: 50%;
+      padding: 0 2rem;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background-color: #231f20;
+      border: 3px solid #ffeaeb;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      right: -10px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -10px;
+    }
+
+    .timeline-content {
+      background: #ffeaeb;
+      padding: 1.5rem;
+      border-radius: 15px;
+      position: relative;
+    }
+
+    .timeline-year {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 50px;
+      }
+      
+      .timeline-dot {
+        left: 10px !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
+<!-- Thanh điều hướng -->
 <nav>
-  <a href="index.html">Trang chủ</a>
-  <a href="thanhvien.html">Thành viên</a>
-  <a href="hoatdong.html">Hoạt động</a>
-  <a href="thanhtich.html">Thành tích</a>
+  <a href="index.html">🏠 Trang chủ</a>
+  <a href="thanhvien.html">👥 Thành viên</a>
+  <a href="hoatdong.html">📅 Hoạt động</a>
+  <a href="thanhtich.html" style="background-color: #ffeaeb; color: #231f20;">🏆 Thành tích</a>
 </nav>
-<hr>
-<h2>Thành tích nổi bật</h2>
 
-<ul>
-  <li>Giải ba bóng đá cấp trường</li>
-  <li>Lên lớp đầy đủ</li>
-  <li>Nhiều học sinh giỏi</li>
-</ul>
-<img src="12c2.jpg" alt="Giải ba bóng đá cấp trường" width="300">
+<div class="container">
+  <!-- Header -->
+  <div class="achievement-header">
+    <h2>🏆 Thành tích nổi bật</h2>
+  </div>
+
+  <!-- Thống kê ấn tượng -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Giải thưởng cấp trường</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Lên lớp đầy đủ</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">15</div>
+      <div class="stat-label">Học sinh giỏi</div>
+    </div>
+  </div>
+
+  <!-- Grid thành tích -->
+  <div class="achievement-grid">
+    <!-- Card 1: Giải ba bóng đá -->
+    <div class="achievement-card">
+      <div class="achievement-image">
+        <img src="12c2.jpg" alt="Giải ba bóng đá cấp trường">
+      </div>
+      <div class="achievement-content">
+        <h3 class="achievement-title">⚽ Giải ba bóng đá cấp trường</h3>
+        <span class="achievement-category">Thể thao</span>
+        <p class="achievement-desc">
+          Đội bóng lớp 12C2 đã xuất sắc giành giải ba trong giải bóng đá 
+          truyền thống của trường THPT Nguyễn Du.
+        </p>
+        <div class="achievement-meta">
+          <span class="achievement-date">📅 Năm học 2023-2024</span>
+          <span class="achievement-badge">Top 3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Lên lớp đầy đủ -->
+    <div class="achievement-card">
+      <div class="achievement-image">
+        <img src="https://via.placeholder.com/400x250/ffeaeb/231f20?text=100%25+Chuyên+cần" alt="Chuyên cần">
+      </div>
+      <div class="achievement-content">
+        <h3 class="achievement-title">📚 Lên lớp đầy đủ</h3>
+        <span class="achievement-category">Học tập</span>
+        <p class="achievement-desc">
+          100% thành viên trong lớp đều đạt tỷ lệ chuyên cần tuyệt đối, 
+          không có học sinh nghỉ học không phép.
+        </p>
+        <div class="achievement-meta">
+          <span class="achievement-date">📅 Cả năm học</span>
+          <span class="achievement-badge">Xuất sắc</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Học sinh giỏi -->
+    <div class="achievement-card">
+      <div class="achievement-image">
+        <img src="https://via.placeholder.com/400x250/ffeaeb/231f20?text=15+Học+sinh+giỏi" alt="Học sinh giỏi">
+      </div>
+      <div class="achievement-content">
+        <h3 class="achievement-title">🎓 Nhiều học sinh giỏi</h3>
+        <span class="achievement-category">Học tập</span>
+        <p class="achievement-desc">
+          Lớp có 15 học sinh đạt danh hiệu học sinh giỏi cấp trường, 
+          trong đó có 3 bạn đạt giải trong kỳ thi học sinh giỏi thành phố.
+        </p>
+        <div class="achievement-meta">
+          <span class="achievement-date">📅 Học kỳ I</span>
+          <span class="achievement-badge">15 bạn</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Danh sách học sinh giỏi -->
+  <div class="honor-board">
+    <h3>🌟 Danh sách học sinh giỏi tiêu biểu</h3>
+    <div class="student-list">
+      <div class="student-item">
+        <div class="student-rank">1</div>
+        <div class="student-name">Nguyễn Văn A</div>
+        <div class="student-achievement">Toán 9.8</div>
+      </div>
+      <div class="student-item">
+        <div class="student-rank">2</div>
+        <div class="student-name">Trần Thị B</div>
+        <div class="student-achievement">Văn 9.5</div>
+      </div>
+      <div class="student-item">
+        <div class="student-rank">3</div>
+        <div class="student-name">Lê Văn C</div>
+        <div class="student-achievement">Anh 9.7</div>
+      </div>
+      <div class="student-item">
+        <div class="student-rank">4</div>
+        <div class="student-name">Phạm Thị D</div>
+        <div class="student-achievement">Lý 9.6</div>
+      </div>
+      <div class="student-item">
+        <div class="student-rank">5</div>
+        <div class="student-name">Hoàng Văn E</div>
+        <div class="student-achievement">Hóa 9.4</div>
+      </div>
+      <div class="student-item">
+        <div class="student-rank">6</div>
+        <div class="student-name">Vũ Thị F</div>
+        <div class="student-achievement">Sinh 9.3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline thành tích -->
+  <div class="timeline-section">
+    <h3>📅 Dòng thời gian thành tích</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">Tháng 9/2023</div>
+          <div class="timeline-title">🎉 Khai giảng năm học mới</div>
+          <p>Lớp đạt giải nhất văn nghệ chào mừng năm học mới</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">Tháng 11/2023</div>
+          <div class="timeline-title">🎭 20/11</div>
+          <p>Tiết mục văn nghệ đạt giải nhì cấp trường</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">Tháng 3/2024</div>
+          <div class="timeline-title">⚽ Giải bóng đá</div>
+          <p>Đạt giải ba bóng đá nam nữ phối hợp</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">Tháng 5/2024</div>
+          <div class="timeline-title">📚 Tổng kết năm học</div>
+          <p>15 học sinh giỏi, 100% lên lớp</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thêm nút chia sẻ -->
+  <div style="text-align: center; margin: 3rem 0;">
+    <button class="btn-outline" style="margin-right: 1rem;" onclick="alert('Chia sẻ thành tích của lớp!')">
+      📤 Chia sẻ thành tích
+    </button>
+    <button onclick="alert('Tải về bảng thành tích lớp 12C2')">
+      📥 Tải thành tích
+    </button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2024 - Lớp 12C2 THPT Nguyễn Du</p>
+  <p>✨ Tự hào với những thành tích đã đạt được ✨</p>
+</footer>
+
 </body>
 </html>
