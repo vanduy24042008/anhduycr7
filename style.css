@@ -1,309 +1,94 @@
-/* Thiết lập font chữ và hình nền cho toàn bộ trang web */
+/* Thiết lập cơ bản và Hình nền */
 body {
-  font-family: 'Quicksand', sans-serif; /* Sử dụng font chữ đẹp hơn */
-  background-image: url('wafi.png'); /* Đặt hình ảnh image_2.png làm nền */
-  background-size: cover; /* Hình nền bao phủ toàn bộ màn hình */
-  background-position: center; /* Căn giữa hình nền */
-  background-attachment: fixed; /* Hình nền cố định khi cuộn trang */
-  margin: 0; /* Xóa lề mặc định của body */
-  color: #fff; /* Đổi màu chữ chính thành trắng để dễ đọc trên nền tối */
+  font-family: 'Quicksand', sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('wafi.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  color: #fff;
+  line-height: 1.6;
 }
 
-/* Kiểu dáng cho container chính để nội dung không bị dính sát mép và có nền mờ */
 .container {
-  max-width: 1200px; /* Chiều rộng tối đa của nội dung */
-  margin: 0 auto; /* Căn giữa container */
-  padding: 20px; /* Khoảng cách bên trong container */
-  background-color: rgba(0, 0, 0, 0.6); /* Nền đen mờ để làm nổi bật nội dung */
-  min-height: 100vh; /* Chiều cao tối thiểu bằng chiều cao màn hình */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Kiểu dáng cho thanh điều hướng */
+/* Thanh điều hướng hiện đại */
 .navbar {
-  display: flex; /* Sử dụng flexbox để căn chỉnh các thành phần */
-  justify-content: space-between; /* Căn giữa logo và các liên kết */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  padding: 15px 0; /* Khoảng cách trên dưới cho thanh điều hướng */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ dưới mờ */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 10px;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Kiểu dáng cho logo */
-.logo {
-  font-size: 24px; /* Kích thước chữ lớn hơn cho logo */
-  font-weight: 700; /* Chữ đậm hơn cho logo */
-  color: #fff; /* Màu chữ trắng cho logo */
-}
-
-/* Kiểu dáng cho các liên kết điều hướng */
 .nav-links {
-  list-style: none; /* Xóa dấu đầu dòng của danh sách */
-  margin: 0; /* Xóa lề mặc định */
-  padding: 0; /* Xóa khoảng cách mặc định */
-  display: flex; /* Hiển thị các liên kết theo hàng ngang */
-  gap: 20px; /* Khoảng cách giữa các liên kết */
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
-  text-decoration: none; /* Xóa gạch chân của liên kết */
-  color: #fff; /* Màu chữ trắng cho liên kết */
-  font-weight: 500; /* Chữ đậm vừa phải cho liên kết */
-  transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà khi hover */
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-.nav-links a:hover {
-  color: #ffcccc; /* Màu chữ khi di chuột qua liên kết */
+.nav-links a:hover, .nav-links a.active {
+  color: #ffcccc;
 }
 
-/* Kiểu dáng cho nội dung chính */
-.main-content {
-  padding: 40px 0; /* Khoảng cách trên dưới cho nội dung chính */
+/* Khung nội dung mờ (Glassmorphism) */
+section, .main-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Kiểu dáng cho header của lớp */
-.class-header {
-  text-align: center; /* Căn giữa nội dung header */
-  margin-bottom: 40px; /* Khoảng cách dưới header */
+h2 {
+  color: #ffcccc;
+  border-bottom: 2px solid #ffcccc;
+  padding-bottom: 10px;
+  margin-top: 0;
 }
 
-.class-header h1 {
-  font-size: 36px; /* Kích thước chữ lớn hơn cho tiêu đề chính */
-  margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
-  color: #fff; /* Màu chữ trắng cho tiêu đề */
+/* Bảng và Danh sách */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.slogan-box {
-  display: inline-flex; /* Hiển thị slogan và dấu ngoặc kép theo hàng ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  gap: 10px; /* Khoảng cách giữa các thành phần */
-  background-color: rgba(255, 255, 255, 0.1); /* Nền mờ cho slogan */
-  padding: 10px 20px; /* Khoảng cách bên trong slogan */
-  border-radius: 5px; /* Bo góc slogan */
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.slogan {
-  font-style: italic; /* Chữ nghiêng cho slogan */
-  color: #eee; /* Màu chữ xám nhạt cho slogan */
+th { background: rgba(255, 204, 204, 0.2); color: #ffcccc; }
+
+ul li {
+  margin-bottom: 10px;
+  list-style-type: '⭐ ';
 }
 
-.author {
-  margin-top: 15px; /* Khoảng cách trên tác giả */
-  font-size: 14px; /* Kích thước chữ nhỏ hơn cho tác giả */
-  color: #ccc; /* Màu chữ xám cho tác giả */
-}
-
-/* Kiểu dáng cho các thống kê */
-.header-stats {
-  display: flex; /* Hiển thị các thống kê theo hàng ngang */
-  justify-content: center; /* Căn giữa các thống kê */
-  gap: 30px; /* Khoảng cách giữa các thống kê */
-  margin-top: 30px; /* Khoảng cách trên thống kê */
-}
-
-.stat-item {
-  text-align: center; /* Căn giữa nội dung thống kê */
-  display: flex; /* Hiển thị các thành phần thống kê theo hàng dọc */
-  flex-direction: column; /* Hiển thị các thành phần thống kê theo hàng dọc */
-  align-items: center; /* Căn giữa theo chiều dọc */
-}
-
-.stat-item i {
-  font-size: 24px; /* Kích thước biểu tượng lớn hơn */
-  margin-bottom: 5px; /* Khoảng cách dưới biểu tượng */
-  color: #ffcccc; /* Màu biểu tượng */
-}
-
-.stat-number {
-  font-size: 20px; /* Kích thước số lớn hơn */
-  font-weight: 700; /* Chữ đậm hơn cho số */
-}
-
-.stat-label {
-  font-size: 14px; /* Kích thước nhãn nhỏ hơn */
-  color: #ccc; /* Màu chữ xám cho nhãn */
-}
-
-/* Kiểu dáng cho phần hình ảnh lớp */
-.class-image-section {
-  text-align: center; /* Căn giữa hình ảnh */
-  margin-bottom: 40px; /* Khoảng cách dưới phần hình ảnh */
-}
-
-.image-wrapper {
-  display: inline-block; /* Hiển thị khung hình ảnh */
-  position: relative; /* Đặt vị trí tương đối cho khung hình ảnh */
-  border-radius: 10px; /* Bo góc khung hình ảnh */
-  overflow: hidden; /* Ẩn nội dung thừa */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Đổ bóng cho khung hình ảnh */
-}
-
-.class-image {
-  width: 100%; /* Chiều rộng hình ảnh bằng 100% */
-  height: auto; /* Chiều cao hình ảnh tự động */
-  display: block; /* Hiển thị hình ảnh */
-}
-
-.image-overlay {
-  position: absolute; /* Đặt vị trí tuyệt đối cho lớp phủ */
-  bottom: 0; /* Đặt vị trí dưới cùng cho lớp phủ */
-  left: 0; /* Đặt vị trí trái cùng cho lớp phủ */
-  width: 100%; /* Chiều rộng lớp phủ bằng 100% */
-  background-color: rgba(0, 0, 0, 0.5); /* Nền mờ cho lớp phủ */
-  color: #fff; /* Màu chữ trắng cho lớp phủ */
-  padding: 10px; /* Khoảng cách bên trong lớp phủ */
-  font-size: 14px; /* Kích thước chữ nhỏ hơn cho lớp phủ */
-}
-
-/* Kiểu dáng cho phần giới thiệu */
-.intro-section {
-  background-color: rgba(255, 255, 255, 0.05); /* Nền mờ cho phần giới thiệu */
-  padding: 30px; /* Khoảng cách bên trong phần giới thiệu */
-  border-radius: 10px; /* Bo góc phần giới thiệu */
-  margin-bottom: 40px; /* Khoảng cách dưới phần giới thiệu */
-}
-
-.intro-section h2 {
-  font-size: 24px; /* Kích thước chữ lớn hơn cho tiêu đề giới thiệu */
-  margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
-  color: #fff; /* Màu chữ trắng cho tiêu đề */
-}
-
-.intro-section p {
-  line-height: 1.6; /* Chiều cao dòng lớn hơn cho văn bản */
-  color: #eee; /* Màu chữ xám nhạt cho văn bản */
-}
-
-/* Kiểu dáng cho phần liên hệ */
-.contact-section {
-  margin-bottom: 40px; /* Khoảng cách dưới phần liên hệ */
-}
-
-.contact-section h2 {
-  text-align: center; /* Căn giữa tiêu đề liên hệ */
-  font-size: 24px; /* Kích thước chữ lớn hơn cho tiêu đề liên hệ */
-  margin-bottom: 30px; /* Khoảng cách dưới tiêu đề */
-  color: #fff; /* Màu chữ trắng cho tiêu đề */
-}
-
-.contact-grid {
-  display: grid; /* Sử dụng CSS Grid để căn chỉnh các thành phần liên hệ */
-  grid-template-columns: 1fr 1fr; /* Chia lưới thành 2 cột bằng nhau */
-  gap: 30px; /* Khoảng cách giữa các cột */
-}
-
-/* Kiểu dáng cho thông tin liên hệ */
-.contact-info {
-  display: flex; /* Hiển thị các thông tin liên hệ theo hàng dọc */
-  flex-direction: column; /* Hiển thị các thông tin liên hệ theo hàng dọc */
-  gap: 20px; /* Khoảng cách giữa các thông tin liên hệ */
-}
-
-.info-card {
-  background-color: rgba(255, 255, 255, 0.05); /* Nền mờ cho mỗi thẻ thông tin */
-  padding: 20px; /* Khoảng cách bên trong mỗi thẻ thông tin */
-  border-radius: 8px; /* Bo góc mỗi thẻ thông tin */
-  display: flex; /* Hiển thị các thành phần thẻ theo hàng ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  gap: 15px; /* Khoảng cách giữa các thành phần thẻ */
-}
-
-.info-card i {
-  font-size: 20px; /* Kích thước biểu tượng lớn hơn */
-  color: #ffcccc; /* Màu biểu tượng */
-}
-
-.info-card h3 {
-  font-size: 16px; /* Kích thước chữ lớn hơn cho tiêu đề thẻ */
-  margin-bottom: 5px; /* Khoảng cách dưới tiêu đề */
-  color: #fff; /* Màu chữ trắng cho tiêu đề */
-}
-
-.info-card p {
-  font-size: 14px; /* Kích thước chữ nhỏ hơn cho nội dung thẻ */
-  color: #ccc; /* Màu chữ xám cho nội dung thẻ */
-}
-
-.info-card a {
-  text-decoration: none; /* Xóa gạch chân của liên kết trong thẻ */
-  color: #ffcccc; /* Màu chữ của liên kết trong thẻ */
-}
-
-/* Kiểu dáng cho form góp ý */
-.contact-form {
-  background-color: rgba(255, 255, 255, 0.05); /* Nền mờ cho form góp ý */
-  padding: 30px; /* Khoảng cách bên trong form góp ý */
-  border-radius: 10px; /* Bo góc form góp ý */
-}
-
-.contact-form h3 {
-  font-size: 18px; /* Kích thước chữ lớn hơn cho tiêu đề form */
-  margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
-  color: #fff; /* Màu chữ trắng cho tiêu đề */
-}
-
-.form-group {
-  margin-bottom: 15px; /* Khoảng cách dưới mỗi nhóm form */
-}
-
-.form-group label {
-  display: block; /* Hiển thị nhãn trên hàng riêng */
-  margin-bottom: 5px; /* Khoảng cách dưới nhãn */
-  font-size: 14px; /* Kích thước chữ nhỏ hơn cho nhãn */
-  color: #ccc; /* Màu chữ xám cho nhãn */
-}
-
-.form-group input, .form-group textarea {
-  width: 100%; /* Chiều rộng input và textarea bằng 100% */
-  padding: 10px; /* Khoảng cách bên trong input và textarea */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ mờ cho input và textarea */
-  border-radius: 5px; /* Bo góc input và textarea */
-  background-color: rgba(255, 255, 255, 0.05); /* Nền mờ cho input và textarea */
-  color: #fff; /* Màu chữ trắng cho input và textarea */
-  font-family: inherit; /* Sử dụng font chữ của body */
-}
-
-.form-group textarea {
-  resize: vertical; /* Cho phép thay đổi kích thước textarea theo chiều dọc */
-}
-
-.submit-btn {
-  background-color: #ffcccc; /* Màu nền cho nút gửi */
-  color: #333; /* Màu chữ tối cho nút gửi */
-  border: none; /* Xóa đường kẻ cho nút gửi */
-  padding: 12px 20px; /* Khoảng cách bên trong nút gửi */
-  border-radius: 5px; /* Bo góc nút gửi */
-  font-weight: 600; /* Chữ đậm hơn cho nút gửi */
-  cursor: pointer; /* Thay đổi con trỏ chuột khi di chuột qua nút gửi */
-  transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền mượt mà khi hover */
-  display: flex; /* Hiển thị biểu tượng và chữ theo hàng ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  gap: 8px; /* Khoảng cách giữa biểu tượng và chữ */
-}
-
-.submit-btn:hover {
-  background-color: #ff9999; /* Màu nền khi di chuột qua nút gửi */
-}
-
-/* Kiểu dáng cho footer */
-.footer {
-  text-align: center; /* Căn giữa nội dung footer */
-  padding: 20px 0; /* Khoảng cách trên dưới cho footer */
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ trên mờ */
-}
-
-.footer-content {
-  color: #ccc; /* Màu chữ xám cho nội dung footer */
-  font-size: 14px; /* Kích thước chữ nhỏ hơn cho nội dung footer */
-}
-
-.social-links {
-  display: flex; /* Hiển thị các liên kết mạng xã hội theo hàng ngang */
-  justify-content: center; /* Căn giữa các liên kết mạng xã hội */
-  gap: 15px; /* Khoảng cách giữa các liên kết mạng xã hội */
-  margin-top: 10px; /* Khoảng cách trên liên kết mạng xã hội */
-}
-
-.social-links a {
-  text-decoration: none; /* Xóa gạch chân của liên kết mạng xã hội */
-  color: #ffcccc; /* Màu chữ của liên kết mạng xã hội */
-  font-size: 18px; /* Kích thước biểu tượng lớn hơn */
+/* Hình ảnh */
+img {
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
