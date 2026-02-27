@@ -1,90 +1,54 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>12C2 - Thành viên</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-  <div class="container">
-    <nav class="navbar">
-      <div class="logo">
-        <i class="fas fa-graduation-cap"></i>
-        <span>12C2</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html"><i class="fas fa-home"></i> Trang chủ</a></li>
-        <li><a href="thanhvien.html" class="active"><i class="fas fa-users"></i> Thành viên</a></li>
-        <li><a href="hoatdong.html"><i class="fas fa-calendar-alt"></i> Hoạt động</a></li>
-        <li><a href="thanhtich.html"><i class="fas fa-trophy"></i> Thành tích</a></li>
-      </ul>
-    </nav>
+<main class="main-content">
+  <section class="intro-section">
+    <h2><i class="fas fa-users"></i> Thành viên tập thể 12C2</h2>
+    <p>Nơi hội tụ những cá nhân xuất sắc và nhiệt huyết.</p>
 
-    <main class="main-content">
-      <section class="intro-section">
-        <h2><i class="fas fa-id-card"></i> Danh sách thành viên</h2>
-        <p>Gặp gỡ những gương mặt tài năng của tập thể 12C2.</p>
-        
-        <div class="table-wrapper">
-          <table class="member-table">
-            <thead>
-              <tr>
-                <th><i class="fas fa-user"></i> Họ tên</th>
-                <th><i class="fas fa-star"></i> Chức vụ</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Lương Thiên Phúc</td>
-                <td><span class="badge leader">Lớp trưởng</span></td>
-              </tr>
-              <tr>
-                <td>Hoàng Lê Băng Trúc</td>
-                <td><span class="badge secretary">Thư kí</span></td>
-              </tr>
-              <tr>
-                <td>Phạm Anh Ý Nhật</td>
-                <td><span class="badge sub-leader">Trưởng tổ 1</span></td>
-              </tr>
-              <tr>
-                <td>Trần Ngọc Linh Chi</td>
-                <td>Thành viên tổ 1</td>
-              </tr>
-              <tr>
-                <td>Nguyễn Bích Diễm</td>
-                <td>Thành viên tổ 1</td>
-              </tr>
-              <tr>
-                <td>Võ Hoàng Duy</td>
-                <td>Thành viên tổ 1</td>
-              </tr>
-              <tr>
-                <td>Võ Văn Duy</td>
-                <td>Thành viên tổ 1</td>
-              </tr>
-              <tr>
-                <td>Bế Tiến Đạt</td>
-                <td>Thành viên tổ 1</td>
-              </tr>
-              <tr>
-                <td>Đinh Thiên Hoan</td>
-                <td>Thành viên tổ 1</td>
-              </tr>
-              <tr>
-                <td colspan="2" class="more-members">... và các thành viên khác ...</td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="card-icon"><i class="fas fa-crown"></i></div>
+        <div class="card-info">
+          <h3>Lương Thiên Phúc</h3>
+          <span class="badge leader">Lớp trưởng</span>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <footer class="footer">
-      <p>&copy; 2024 Lớp 12C2 - THPT Nguyễn Du</p>
-    </footer>
-  </div>
-</body>
-</html>
+      <div class="member-card">
+        <div class="card-icon"><i class="fas fa-pen-nib"></i></div>
+        <div class="card-info">
+          <h3>Hoàng Lê Băng Trúc</h3>
+          <span class="badge secretary">Thư kí</span>
+        </div>
+      </div>
+
+      <div class="member-card">
+        <div class="card-icon"><i class="fas fa-star"></i></div>
+        <div class="card-info">
+          <h3>Phạm Anh Ý Nhật</h3>
+          <span class="badge sub-leader">Trưởng tổ 1</span>
+        </div>
+      </div>
+
+      <div class="member-card">
+        <div class="card-icon"><i class="fas fa-user"></i></div>
+        <div class="card-info">
+          <h3>Trần Ngọc Linh Chi</h3>
+          <p>Thành viên tổ 1</p>
+        </div>
+      </div>
+
+      <div class="member-card">
+        <div class="card-icon"><i class="fas fa-user"></i></div>
+        <div class="card-info">
+          <h3>Nguyễn Bích Diễm</h3>
+          <p>Thành viên tổ 1</p>
+        </div>
+      </div>
+
+      <div class="member-card more">
+        <div class="card-info">
+          <h3>Và nhiều thành viên khác...</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
