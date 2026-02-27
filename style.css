@@ -4,7 +4,7 @@
 body {
   font-family: 'Quicksand', sans-serif;
   /* Sử dụng ảnh wafi.jpg làm nền, thêm lớp phủ tối để chữ nổi bật */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('wafi.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('wafi.ppg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
