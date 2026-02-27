@@ -2,68 +2,755 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thành viên lớp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thành viên lớp 12C2</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Bổ sung CSS riêng cho trang thành viên */
+    .member-header {
+      text-align: center;
+      margin: 2rem 0;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .member-header h2 {
+      font-size: 2.5rem;
+      color: #231f20;
+      display: inline-block;
+      padding: 0 2rem 1rem;
+      border-bottom: 4px solid #231f20;
+    }
+
+    .class-info {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .info-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .info-card:nth-child(1) { animation-delay: 0.1s; }
+    .info-card:nth-child(2) { animation-delay: 0.2s; }
+    .info-card:nth-child(3) { animation-delay: 0.3s; }
+    .info-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(35, 31, 32, 0.15);
+    }
+
+    .info-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-label {
+      color: #666;
+      font-weight: 600;
+    }
+
+    .search-section {
+      background: white;
+      border-radius: 50px;
+      padding: 0.5rem;
+      margin: 2rem 0;
+      display: flex;
+      box-shadow: 0 5px 15px rgba(35, 31, 32, 0.1);
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      background: transparent;
+    }
+
+    .search-input:focus {
+      outline: none;
+    }
+
+    .search-btn {
+      background-color: #231f20;
+      color: #ffeaeb;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+      background-color: #ffeaeb;
+      color: #231f20;
+      transform: scale(1.05);
+    }
+
+    /* Bảng danh sách lớp */
+    .class-table {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+      margin: 2rem 0;
+    }
+
+    .table-header {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #ffeaeb;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: #fff5f6;
+    }
+
+    .student-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #ffeaeb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #231f20;
+      border: 2px solid #231f20;
+    }
+
+    .student-name {
+      font-weight: 600;
+    }
+
+    .student-role {
+      background-color: #ffeaeb;
+      color: #231f20;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .student-tag {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 0.2rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+
+    /* Phân trang */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+    }
+
+    .page-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: white;
+      color: #231f20;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(35, 31, 32, 0.1);
+    }
+
+    .page-item:hover {
+      background-color: #231f20;
+      color: #ffeaeb;
+      transform: translateY(-2px);
+    }
+
+    .page-item.active {
+      background-color: #231f20;
+      color: #ffeaeb;
+    }
+
+    /* Bảng nhiệm vụ */
+    .duty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .duty-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .duty-card:nth-child(1) { animation-delay: 0.2s; }
+    .duty-card:nth-child(2) { animation-delay: 0.4s; }
+    .duty-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .duty-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(35, 31, 32, 0.2);
+    }
+
+    .duty-header {
+      background-color: #231f20;
+      color: #ffeaeb;
+      padding: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .duty-list {
+      padding: 1.5rem;
+    }
+
+    .duty-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed #ffeaeb;
+    }
+
+    .duty-item:last-child {
+      border-bottom: none;
+    }
+
+    .duty-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #ffeaeb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border: 2px solid #231f20;
+    }
+
+    .duty-info {
+      flex: 1;
+    }
+
+    .duty-name {
+      font-weight: 600;
+      color: #231f20;
+    }
+
+    .duty-role {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .group-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .group-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(35, 31, 32, 0.1);
+    }
+
+    .group-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #231f20;
+    }
+
+    .group-member {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.5rem 0;
+    }
+
+    .group-member .avatar {
+      width: 30px;
+      height: 30px;
+      background-color: #ffeaeb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border: 2px solid #231f20;
+    }
+
+    @media (max-width: 768px) {
+      .class-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .search-section {
+        flex-direction: column;
+        border-radius: 20px;
+      }
+      
+      .search-btn {
+        width: 100%;
+      }
+      
+      .group-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
+<!-- Thanh điều hướng -->
 <nav>
-  <a href="index.html">Trang chủ</a>
-  <a href="thanhvien.html">Thành viên</a>
-  <a href="hoatdong.html">Hoạt động</a>
-  <a href="thanhtich.html">Thành tích</a>
+  <a href="index.html">🏠 Trang chủ</a>
+  <a href="thanhvien.html" style="background-color: #ffeaeb; color: #231f20;">👥 Thành viên</a>
+  <a href="hoatdong.html">📅 Hoạt động</a>
+  <a href="thanhtich.html">🏆 Thành tích</a>
 </nav>
-<hr>
-<h2>Danh sách thành viên</h2>
 
-<table border="1">
-  <tr>
-    <th>Họ tên</th>
-    <th>Chức vụ</th>
-  </tr>
-  <tr>
-    <td>Lương Thiên Phúc</td>
-    <td>Lớp trưởng</td>
-  </tr>
-  <tr>
-    <td>Hoàng Lê Băng Trúc</td>
-    <td>Thư kí</td>
-  </tr>
-  <tr>
-    <td>Phạm Anh Ý Nhật</td>
-    <td>Trưởng tổ 1</td>
-  </tr>
-  <tr>
-    <td>Trần Ngọc Linh Chi</td>
-    <td>Thành viên tổ 1</td>
-</tr>
-<tr>
-    <td>Nguyễn Bích Diễm</td>
-    <td>Thành viên tổ 1</td>
-</tr>
-<tr>
-    <td>Võ Hoàng Duy</td>
-    <td>Thành viên tổ 1</td>
-</tr>
-<tr>
-    <td>Võ Văn Duy</td>
-    <td>Thành viên tổ 1</td>
-</tr>
-<tr>
-    <td>Bế Tiến Đạt</td>
-    <td>Thành viên tổ 1</td>
-</tr>
-  <tr>
-    <td>Đinh Thiên Hoan</td>
-    <td>Thành viên tổ 1</td>
-</tr>
-  <tr>
-    <td>Nhiều lắm</td>
-    <td>blablabla</td>
-</tr>
-</table>
+<div class="container">
+  <!-- Header -->
+  <div class="member-header">
+    <h2>👥 Danh sách thành viên lớp 12C2</h2>
+    <p style="color: #666; margin-top: 1rem;">40 cá tính - Một tập thể đoàn kết</p>
+  </div>
+
+  <!-- Thông tin lớp -->
+  <div class="class-info">
+    <div class="info-card">
+      <div class="info-icon">👨‍🎓</div>
+      <div class="info-number">20</div>
+      <div class="info-label">Nam</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">👩‍🎓</div>
+      <div class="info-number">20</div>
+      <div class="info-label">Nữ</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🏆</div>
+      <div class="info-number">15</div>
+      <div class="info-label">Học sinh giỏi</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">📚</div>
+      <div class="info-number">4</div>
+      <div class="info-label">Tổ</div>
+    </div>
+  </div>
+
+  <!-- Thanh tìm kiếm -->
+  <div class="search-section">
+    <input type="text" class="search-input" placeholder="🔍 Tìm kiếm thành viên...">
+    <button class="search-btn" onclick="alert('Chức năng tìm kiếm đang phát triển')">Tìm kiếm</button>
+  </div>
+
+  <!-- Danh sách lớp chính -->
+  <div class="class-table">
+    <div class="table-header">
+      <span>📋</span> Danh sách chi tiết thành viên
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th></th>
+          <th>Họ và tên</th>
+          <th>Chức vụ</th>
+          <th>Tổ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Ban cán sự -->
+        <tr>
+          <td>1</td>
+          <td><div class="student-avatar">LP</div></td>
+          <td class="student-name">Lương Thiên Phúc</td>
+          <td><span class="student-role">Lớp trưởng</span></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><div class="student-avatar">BT</div></td>
+          <td class="student-name">Hoàng Lê Băng Trúc</td>
+          <td><span class="student-role">Thư ký</span> <span class="student-tag">Bí thư</span></td>
+          <td>3</td>
+        </tr>
+        
+        <!-- Tổ 1 -->
+        <tr>
+          <td>3</td>
+          <td><div class="student-avatar">YN</div></td>
+          <td class="student-name">Phạm Anh Ý Nhật</td>
+          <td><span class="student-role">Trưởng tổ 1</span></td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><div class="student-avatar">LC</div></td>
+          <td class="student-name">Trần Ngọc Linh Chi</td>
+          <td>Thành viên</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><div class="student-avatar">BD</div></td>
+          <td class="student-name">Nguyễn Bích Diễm</td>
+          <td>Thành viên</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><div class="student-avatar">HD</div></td>
+          <td class="student-name">Võ Hoàng Duy</td>
+          <td>Thành viên</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><div class="student-avatar">VD</div></td>
+          <td class="student-name">Võ Văn Duy</td>
+          <td>Thành viên</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><div class="student-avatar">TĐ</div></td>
+          <td class="student-name">Bế Tiến Đạt</td>
+          <td>Thành viên</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><div class="student-avatar">TH</div></td>
+          <td class="student-name">Đinh Thiên Hoan</td>
+          <td>Thành viên</td>
+          <td>1</td>
+        </tr>
+
+        <!-- Tổ 2 -->
+        <tr>
+          <td>10</td>
+          <td><div class="student-avatar">TA</div></td>
+          <td class="student-name">Nguyễn Thị An</td>
+          <td><span class="student-role">Trưởng tổ 2</span></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><div class="student-avatar">BT</div></td>
+          <td class="student-name">Trần Văn Bình</td>
+          <td>Thành viên</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><div class="student-avatar">MC</div></td>
+          <td class="student-name">Lê Thị Mai Chi</td>
+          <td>Thành viên</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><div class="student-avatar">QD</div></td>
+          <td class="student-name">Phạm Quốc Dũng</td>
+          <td>Thành viên</td>
+          <td>2</td>
+        </tr>
+
+        <!-- Tổ 3 -->
+        <tr>
+          <td>14</td>
+          <td><div class="student-avatar">HH</div></td>
+          <td class="student-name">Trần Thị Hồng Hạnh</td>
+          <td><span class="student-role">Trưởng tổ 3</span></td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><div class="student-avatar">KH</div></td>
+          <td class="student-name">Nguyễn Minh Khang</td>
+          <td>Thành viên</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><div class="student-avatar">TL</div></td>
+          <td class="student-name">Vũ Thị Phương Linh</td>
+          <td>Thành viên</td>
+          <td>3</td>
+        </tr>
+
+        <!-- Tổ 4 -->
+        <tr>
+          <td>17</td>
+          <td><div class="student-avatar">NM</div></td>
+          <td class="student-name">Đỗ Thị Ngọc Mai</td>
+          <td><span class="student-role">Trưởng tổ 4</span></td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><div class="student-avatar">AN</div></td>
+          <td class="student-name">Lê Hoàng Anh</td>
+          <td>Thành viên</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><div class="student-avatar">HP</div></td>
+          <td class="student-name">Nguyễn Thị Hồng Phúc</td>
+          <td>Thành viên</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td><div class="student-avatar">VT</div></td>
+          <td class="student-name">Trần Minh Tuấn</td>
+          <td>Thành viên</td>
+          <td>4</td>
+        </tr>
+        <!-- Thêm các thành viên khác tương tự -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Phân trang -->
+  <div class="pagination">
+    <div class="page-item">←</div>
+    <div class="page-item active">1</div>
+    <div class="page-item">2</div>
+    <div class="page-item">3</div>
+    <div class="page-item">→</div>
+  </div>
+
+  <!-- Ban cán sự lớp -->
+  <div class="duty-grid">
+    <div class="duty-card">
+      <div class="duty-header">👑 Ban cán sự lớp</div>
+      <div class="duty-list">
+        <div class="duty-item">
+          <div class="duty-avatar">LP</div>
+          <div class="duty-info">
+            <div class="duty-name">Lương Thiên Phúc</div>
+            <div class="duty-role">Lớp trưởng</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">BT</div>
+          <div class="duty-info">
+            <div class="duty-name">Hoàng Lê Băng Trúc</div>
+            <div class="duty-role">Thư ký</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="duty-card">
+      <div class="duty-header">🌟 Tổ trưởng các tổ</div>
+      <div class="duty-list">
+        <div class="duty-item">
+          <div class="duty-avatar">YN</div>
+          <div class="duty-info">
+            <div class="duty-name">Phạm Anh Ý Nhật</div>
+            <div class="duty-role">Tổ trưởng tổ 1</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">TA</div>
+          <div class="duty-info">
+            <div class="duty-name">Nguyễn Thị An</div>
+            <div class="duty-role">Tổ trưởng tổ 2</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">HH</div>
+          <div class="duty-info">
+            <div class="duty-name">Trần Thị Hồng Hạnh</div>
+            <div class="duty-role">Tổ trưởng tổ 3</div>
+          </div>
+        </div>
+        <div class="duty-item">
+          <div class="duty-avatar">NM</div>
+          <div class="duty-info">
+            <div class="duty-name">Đỗ Thị Ngọc Mai</div>
+            <div class="duty-role">Tổ trưởng tổ 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Danh sách theo tổ -->
+  <h2 style="margin: 2rem 0 1rem;">📋 Danh sách theo tổ</h2>
+  <div class="group-section">
+    <div class="group-card">
+      <div class="group-title">Tổ 1</div>
+      <div class="group-member">
+        <div class="avatar">YN</div>
+        <span>Phạm Anh Ý Nhật (Tổ trưởng)</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">LC</div>
+        <span>Trần Ngọc Linh Chi</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">BD</div>
+        <span>Nguyễn Bích Diễm</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">HD</div>
+        <span>Võ Hoàng Duy</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">VD</div>
+        <span>Võ Văn Duy</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">TĐ</div>
+        <span>Bế Tiến Đạt</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">TH</div>
+        <span>Đinh Thiên Hoan</span>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">Tổ 2</div>
+      <div class="group-member">
+        <div class="avatar">TA</div>
+        <span>Nguyễn Thị An (Tổ trưởng)</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">BT</div>
+        <span>Trần Văn Bình</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">MC</div>
+        <span>Lê Thị Mai Chi</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">QD</div>
+        <span>Phạm Quốc Dũng</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">LP</div>
+        <span>Lương Thiên Phúc (Lớp trưởng)</span>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">Tổ 3</div>
+      <div class="group-member">
+        <div class="avatar">HH</div>
+        <span>Trần Thị Hồng Hạnh (Tổ trưởng)</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">KH</div>
+        <span>Nguyễn Minh Khang</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">TL</div>
+        <span>Vũ Thị Phương Linh</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">BT</div>
+        <span>Hoàng Lê Băng Trúc (Thư ký)</span>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">Tổ 4</div>
+      <div class="group-member">
+        <div class="avatar">NM</div>
+        <span>Đỗ Thị Ngọc Mai (Tổ trưởng)</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">AN</div>
+        <span>Lê Hoàng Anh</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">HP</div>
+        <span>Nguyễn Thị Hồng Phúc</span>
+      </div>
+      <div class="group-member">
+        <div class="avatar">VT</div>
+        <span>Trần Minh Tuấn</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2024 - Lớp 12C2 THPT Nguyễn Du</p>
+  <p>👥 40 thành viên - Đoàn kết - Chăm chỉ - Vươn lên</p>
+</footer>
 
 </body>
 </html>
-
-
