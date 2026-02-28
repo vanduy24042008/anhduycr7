@@ -1,24 +1,75 @@
 body {
-  font-family: Arial;
-  background-color: #ffeaeb;
-  margin: 20px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  /* Sử dụng hình wafi.jpg làm nền toàn trang */
+  background: url('wafi.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Khung nội dung mờ ảo giúp chữ nổi bật */
+.main-content {
+  background: rgba(0, 0, 0, 0.6); /* Nền tối trong suốt */
+  backdrop-filter: blur(8px); /* Làm mờ ảnh nền phía sau */
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  margin: 20px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+nav {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 25px;
+  border-radius: 50px;
 }
 
 nav a {
-  margin-right: 15px;
+  margin: 0 15px;
   text-decoration: none;
-  color: #231f20;
+  color: #fff;
   font-weight: bold;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #ffeb3b; /* Màu vàng khi di chuột qua */
 }
 
 h1, h2 {
-  color: #231f20;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 15px;
 }
 
 th, td {
-  padding: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  text-align: left;
+}
+
+th {
+  background: rgba(255,255,255,0.2);
+}
+
+img {
+  display: block;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
 }
