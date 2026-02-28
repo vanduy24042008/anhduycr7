@@ -2,43 +2,476 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thành viên lớp 12C2</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+      min-height: 100vh;
+    }
+
+    nav {
+      background: linear-gradient(90deg, #2c3e50 0%, #3498db 100%);
+      padding: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a i {
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: #f1c40f;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 70%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      animation: fadeInDown 1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    h2 i {
+      color: #3498db;
+      font-size: 2rem;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, #2c3e50, #3498db);
+      border-radius: 2px;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .stat-info {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+      animation: fadeInUp 1s ease;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 1rem 1.5rem;
+      text-align: left;
+    }
+
+    td {
+      border-bottom: 1px solid #ecf0f1;
+      color: #34495e;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background: #f8f9fa;
+      transform: scale(1.01);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .role-badge {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .role-leader {
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      color: white;
+    }
+
+    .role-secretary {
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      color: white;
+    }
+
+    .role-team-leader {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+    }
+
+    .role-member {
+      background: #ecf0f1;
+      color: #7f8c8d;
+    }
+
+    .team-tag {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      background: #e1f5fe;
+      color: #0288d1;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      border-top: 1px solid #dcdde1;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      nav a {
+        width: 100%;
+        justify-content: center;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .stats-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .stat-card {
+        width: 100%;
+        justify-content: center;
+      }
+
+      th, td {
+        padding: 0.8rem;
+      }
+
+      td:first-child {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html">Trang chủ</a>
-  <a href="thanhvien.html">Thành viên</a>
-  <a href="hoatdong.html">Hoạt động</a>
-  <a href="thanhtich.html">Thành tích</a>
+  <a href="index.html"><i class="fas fa-home"></i> Trang chủ</a>
+  <a href="thanhvien.html"><i class="fas fa-users"></i> Thành viên</a>
+  <a href="hoatdong.html"><i class="fas fa-calendar-alt"></i> Hoạt động</a>
+  <a href="thanhtich.html"><i class="fas fa-trophy"></i> Thành tích</a>
 </nav>
 
-<div class="main-content">
-  <h2>Danh sách thành viên</h2>
-  <table>
-    <tr><th>Họ tên</th><th>Chức vụ</th></tr>
-    <tr><td>Lương Thiên Phúc</td><td>Lớp trưởng</td></tr>
-    <tr><td>Hoàng Lê Băng Trúc</td><td>Thư kí</td></tr>
-    <tr><td>Phạm Anh Ý Nhật</td><td>Trưởng tổ 1</td></tr>
-    <tr><td>Trần Ngọc Linh Chi</td><td>Thành viên tổ 1</td></tr>
-    <tr><td>Nguyễn Bích Diễm</td><td>Thành viên tổ 1</td></tr>
-    <tr><td>Võ Hoàng Duy</td><td>Thành viên tổ 1</td></tr>
-    <tr><td>Võ Văn Duy</td><td>Thành viên tổ 1</td></tr>
-    <tr><td>Bế Tiến Đạt</td><td>Thành viên tổ 1</td></tr>
-    <tr><td>Đinh Thiên Hoan</td><td>Thành viên tổ 1</td></tr>
-    <tr><td>Nguyễn Minh Anh</td><td>Thành viên tổ 2</td></tr>
-    <tr><td>Lê Văn Tám</td><td>Thành viên tổ 2</td></tr>
-    <tr><td>Trần Thị Nụ</td><td>Thành viên tổ 2</td></tr>
-    <tr><td>Phạm Quốc Bảo</td><td>Thành viên tổ 3</td></tr>
-    <tr><td>Lý Thanh Thảo</td><td>Thành viên tổ 3</td></tr>
-    <tr><td>Đặng Hoàng Nam</td><td>Thành viên tổ 3</td></tr>
-    <tr><td>Bùi Tuyết Mai</td><td>Thành viên tổ 4</td></tr>
-    <tr><td>Ngô Gia Tự</td><td>Thành viên tổ 4</td></tr>
-    <tr><td>Vương Tiểu Long</td><td>Thành viên tổ 4</td></tr>
-    <tr><td>Đỗ Kim Ngân</td><td>Thành viên tổ 4</td></tr>
-  </table>
+<div class="container">
+  <h2>
+    <i class="fas fa-user-graduate"></i>
+    Danh sách thành viên lớp 12C2
+    <i class="fas fa-user-graduate"></i>
+  </h2>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-number">19</div>
+        <div class="stat-label">Tổng số thành viên</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Ban cán sự</div>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="fas fa-layer-group"></i>
+      </div>
+      <div class="stat-info">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Tổ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th><i class="fas fa-user"></i> Họ tên</th>
+          <th><i class="fas fa-tag"></i> Chức vụ</th>
+          <th><i class="fas fa-info-circle"></i> Tổ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #3498db; margin-right: 0.5rem;"></i>Lương Thiên Phúc</td>
+          <td><span class="role-badge role-leader">Lớp trưởng</span></td>
+          <td>Ban cán sự</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #9b59b6; margin-right: 0.5rem;"></i>Hoàng Lê Băng Trúc</td>
+          <td><span class="role-badge role-secretary">Thư kí</span></td>
+          <td>Ban cán sự</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #e67e22; margin-right: 0.5rem;"></i>Phạm Anh Ý Nhật</td>
+          <td><span class="role-badge role-team-leader">Trưởng tổ 1</span></td>
+          <td>Tổ 1 <span class="team-tag"><i class="fas fa-crown"></i> Tổ trưởng</span></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Trần Ngọc Linh Chi</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 1</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Nguyễn Bích Diễm</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 1</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Võ Hoàng Duy</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 1</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Võ Văn Duy</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 1</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Bế Tiến Đạt</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 1</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Đinh Thiên Hoan</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 1</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Nguyễn Minh Anh</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 2</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Lê Văn Tám</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 2</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Trần Thị Nụ</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 2</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Phạm Quốc Bảo</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 3</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Lý Thanh Thảo</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 3</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Đặng Hoàng Nam</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 3</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Bùi Tuyết Mai</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 4</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Ngô Gia Tự</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 4</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Vương Tiểu Long</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 4</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user-circle" style="color: #27ae60; margin-right: 0.5rem;"></i>Đỗ Kim Ngân</td>
+          <td><span class="role-badge role-member">Thành viên</span></td>
+          <td>Tổ 4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<footer>
+  <p><i class="far fa-copyright"></i> 2024 - Lớp 12C2 thân yêu | <i class="fas fa-heart" style="color: #e74c3c;"></i> Tất cả thành viên</p>
+</footer>
 
 </body>
 </html>
