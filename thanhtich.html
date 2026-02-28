@@ -2,36 +2,622 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thành tích lớp</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thành tích lớp 12C2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    nav {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      padding: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a i {
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: #ffd700;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 70%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+      position: relative;
+      animation: fadeInDown 1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    h2 i {
+      color: #f5576c;
+      font-size: 2.5rem;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+      border-radius: 2px;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .achievement-card {
+      background: white;
+      border-radius: 30px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+      animation: fadeInUp 1s ease;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .achievement-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      transform: rotate(-5deg);
+      transition: transform 0.3s ease;
+    }
+
+    .achievement-card:hover .card-icon {
+      transform: rotate(0deg) scale(1.1);
+    }
+
+    .card-header h3 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .achievement-list {
+      list-style: none;
+    }
+
+    .achievement-list li {
+      padding: 1rem 0;
+      border-bottom: 2px dashed #f0e6ff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .achievement-list li:last-child {
+      border-bottom: none;
+    }
+
+    .list-icon {
+      color: #f5576c;
+      font-size: 1.2rem;
+    }
+
+    .trophy-icon {
+      color: #ffd700;
+      margin-left: 0.5rem;
+    }
+
+    /* Individual Achievements */
+    .individual-section {
+      background: white;
+      border-radius: 30px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .individual-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .individual-header i {
+      font-size: 2.5rem;
+      color: #667eea;
+    }
+
+    .individual-header h3 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .individual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .individual-card {
+      background: linear-gradient(135deg, #f8f0ff, #fff);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .individual-card:hover {
+      border-color: #667eea;
+      transform: scale(1.02);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .achievement-info {
+      flex: 1;
+    }
+
+    .achievement-info h4 {
+      font-size: 1.3rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .achievement-info h4 i {
+      color: #f5576c;
+      font-size: 1rem;
+    }
+
+    .achievement-info p {
+      color: #666;
+      line-height: 1.5;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .achievement-info p i {
+      color: #ffd700;
+      font-size: 0.9rem;
+    }
+
+    /* Image Section */
+    .image-section {
+      animation: fadeInUp 1.4s ease;
+    }
+
+    .image-container {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .image-container:hover {
+      transform: scale(1.02);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.05);
+    }
+
+    .image-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 2rem 1rem 1rem;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .image-caption i {
+      margin: 0 0.5rem;
+      color: #ffd700;
+    }
+
+    /* Stats */
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-item {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #e0d6ff;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      nav a {
+        width: 100%;
+        justify-content: center;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .achievement-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-section {
+        grid-template-columns: 1fr;
+      }
+
+      .individual-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .achievement-info h4 {
+        justify-content: center;
+      }
+
+      .achievement-info p {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html">Trang chủ</a>
-  <a href="thanhvien.html">Thành viên</a>
-  <a href="hoatdong.html">Hoạt động</a>
-  <a href="thanhtich.html">Thành tích</a>
+  <a href="index.html"><i class="fas fa-home"></i> Trang chủ</a>
+  <a href="thanhvien.html"><i class="fas fa-users"></i> Thành viên</a>
+  <a href="hoatdong.html"><i class="fas fa-calendar-alt"></i> Hoạt động</a>
+  <a href="thanhtich.html"><i class="fas fa-trophy"></i> Thành tích</a>
 </nav>
 
-<div class="main-content">
-  <h2>Bảng vàng thành tích</h2>
-  
-  <h3>Thành tích tập thể:</h3>
-  <ul>
-    <li>Giải ba bóng đá cấp trường</li>
-    <li>Lên lớp đầy đủ 100%</li>
-    <li>Đạt danh hiệu lớp tiên tiến</li>
-  </ul>
+<div class="container">
+  <h2>
+    <i class="fas fa-crown"></i>
+    Bảng vàng thành tích
+    <i class="fas fa-crown"></i>
+  </h2>
 
-  <h3>Thành tích cá nhân:</h3>
-  <ul>
-    <li><b>Lương Thiên Phúc:</b> Giải Nhất học sinh giỏi cấp Tỉnh.</li>
-    <li><b>Võ Văn Duy:</b> Vua phá lưới giải bóng đá THPT Nguyễn Du.</li>
-    <li><b>Hoàng Lê Băng Trúc:</b> Giải Nhì cuộc thi hùng biện tiếng Anh.</li>
-  </ul>
+  <!-- Achievement Grid -->
+  <div class="achievement-grid">
+    <!-- Tập thể -->
+    <div class="achievement-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Tập thể</h3>
+      </div>
+      <ul class="achievement-list">
+        <li>
+          <i class="fas fa-trophy list-icon"></i>
+          Giải ba bóng đá cấp trường
+          <i class="fas fa-medal trophy-icon"></i>
+        </li>
+        <li>
+          <i class="fas fa-check-circle list-icon"></i>
+          Lên lớp đầy đủ 100%
+        </li>
+        <li>
+          <i class="fas fa-star list-icon"></i>
+          Đạt danh hiệu lớp tiên tiến
+          <i class="fas fa-award trophy-icon"></i>
+        </li>
+      </ul>
+    </div>
 
-  <img src="12c2.jpg" alt="Giải ba bóng đá" width="500"> </div>
+    <!-- Cá nhân -->
+    <div class="achievement-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <h3>Cá nhân</h3>
+      </div>
+      <ul class="achievement-list">
+        <li>
+          <i class="fas fa-star list-icon"></i>
+          <b>Nguyễn Minh Quân:</b> Giải HSG Toán
+        </li>
+        <li>
+          <i class="fas fa-futbol list-icon"></i>
+          <b>Phạm Anh Ý Nhật:</b> Vua phá lưới
+        </li>
+        <li>
+          <i class="fas fa-gamepad list-icon"></i>
+          <b>Nguyễn Mạnh Tiến:</b> Top 1 Pubg
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Individual Cards -->
+  <div class="individual-section">
+    <div class="individual-header">
+      <i class="fas fa-star"></i>
+      <h3>Thành tích nổi bật</h3>
+    </div>
+    
+    <div class="individual-grid">
+      <div class="individual-card">
+        <div class="avatar">
+          <span>Q</span>
+        </div>
+        <div class="achievement-info">
+          <h4>
+            <i class="fas fa-user"></i>
+            Nguyễn Minh Quân
+          </h4>
+          <p>
+            <i class="fas fa-trophy"></i>
+            Đạt giải học sinh giỏi môn toán
+          </p>
+        </div>
+      </div>
+
+      <div class="individual-card">
+        <div class="avatar">
+          <span>N</span>
+        </div>
+        <div class="achievement-info">
+          <h4>
+            <i class="fas fa-user"></i>
+            Phạm Anh Ý Nhật
+          </h4>
+          <p>
+            <i class="fas fa-futbol"></i>
+            Vua phá lưới giải bóng đá THPT Nguyễn Du
+          </p>
+        </div>
+      </div>
+
+      <div class="individual-card">
+        <div class="avatar">
+          <span>T</span>
+        </div>
+        <div class="achievement-info">
+          <h4>
+            <i class="fas fa-user"></i>
+            Nguyễn Mạnh Tiến
+          </h4>
+          <p>
+            <i class="fas fa-gamepad"></i>
+            Top 1 Pubg
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Section -->
+  <div class="image-section">
+    <div class="image-container">
+      <img src="12c2.jpg" alt="Giải ba bóng đá">
+      <div class="image-caption">
+        <i class="fas fa-camera"></i>
+        Khoảnh khắc nhận giải ba bóng đá
+        <i class="fas fa-camera"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-section">
+    <div class="stat-item">
+      <div class="stat-number">3</div>
+      <div class="stat-label">
+        <i class="fas fa-trophy"></i>
+        Thành tích tập thể
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">3</div>
+      <div class="stat-label">
+        <i class="fas fa-star"></i>
+        Cá nhân xuất sắc
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">
+        <i class="fas fa-check-circle"></i>
+        Chuyên cần
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    <i class="far fa-copyright"></i> 2024 - Lớp 12C2 thân yêu | 
+    <i class="fas fa-heart" style="color: #f5576c;"></i> 
+    Tự hào và tỏa sáng
+  </p>
+</footer>
 
 </body>
 </html>
