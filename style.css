@@ -1,7 +1,7 @@
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   /* Sử dụng hình wafi.jpg làm nền toàn trang */
-  background: url('wafi.jpg') no-repeat center center fixed;
+  background: url('wafi.png') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   display: flex;
