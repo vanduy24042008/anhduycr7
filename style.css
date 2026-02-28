@@ -1,24 +1,131 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
 body {
-  font-family: Arial;
-  background-color: #ffeaeb;
-  margin: 20px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffeaeb, #ffd6da);
+  margin: 0;
+  color: #231f20;
+}
+
+/* NAVIGATION */
+nav {
+  background: white;
+  padding: 15px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
 }
 
 nav a {
-  margin-right: 15px;
+  margin-right: 20px;
   text-decoration: none;
   color: #231f20;
-  font-weight: bold;
+  font-weight: 600;
+  transition: 0.3s;
+  padding: 6px 10px;
+  border-radius: 6px;
 }
 
-h1, h2 {
-  color: #231f20;
+nav a:hover {
+  background-color: #ffccd2;
+  color: #c2185b;
 }
 
+/* HEADINGS */
+h1 {
+  text-align: center;
+  margin: 30px 0 10px;
+  font-size: 36px;
+}
+
+h2 {
+  margin: 25px 0 10px;
+  border-left: 5px solid #ff6f91;
+  padding-left: 10px;
+}
+
+/* CONTENT AREA */
+section {
+  background: white;
+  margin: 20px auto;
+  padding: 25px;
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* TABLE */
 table {
   border-collapse: collapse;
+  width: 100%;
+  margin-top: 15px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+th {
+  background-color: #ff6f91;
+  color: white;
+  text-transform: uppercase;
 }
 
 th, td {
-  padding: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #fff0f2;
+}
+
+tr:hover {
+  background-color: #ffe0e6;
+  transition: 0.3s;
+}
+
+/* IMAGE */
+img {
+  border-radius: 12px;
+  margin-top: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* BUTTON */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff6f91;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #c2185b;
+}
+
+/* FORM INPUT */
+input, textarea {
+  padding: 10px;
+  width: 100%;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #ff6f91;
+  box-shadow: 0 0 5px rgba(255, 111, 145, 0.5);
 }
